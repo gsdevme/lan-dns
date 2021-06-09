@@ -20,3 +20,27 @@ rc-update add dnsmasq default && rc-service dnsmasq restart
 ```bash
 cd /$HOME/lan-dns/ && git pull && rc-service dnsmasq restart
 ```
+
+# VIP
+
+For redundancy multiple deployments should be used with keepalived providing a virtual ip address
+
+```bash
+apk add keepalived && rc-update add keepalived default
+
+# /etc/keepalived/keepalived.conf
+vrrp_instance VI_1 {
+    state MASTER
+    interface eth0
+    virtual_router_id 77
+    priority 100
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass xxxxxx
+    }
+    virtual_ipaddress {
+        172.16.16.50
+    }
+}
+```
