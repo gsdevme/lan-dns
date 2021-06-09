@@ -12,6 +12,7 @@ apk add dnsmasq git
 cd $HOME && git clone https://github.com/gsdevme/lan-dns.git
 
 ln -sf /$HOME/lan-dns/etc/dnsmasq.conf /etc/dnsmasq.conf
+ln -sf /$HOME/lan-dns/etc/periodic/daily/auto-update.sh /etc/periodic/daily/dns-auto-updater
 rc-update add dnsmasq default && rc-service dnsmasq restart
 ```
 
